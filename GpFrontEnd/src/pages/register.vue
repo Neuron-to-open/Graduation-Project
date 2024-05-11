@@ -184,6 +184,8 @@
       if (internalResponse.data.error_num == 0) {
         alert("注册成功")
         tologin()
+      }else if (internalResponse.data.error_num == 1){
+        alert("用户名已存在")
       }
       
       // 可以在这里添加更多的逻辑处理，比如跳转、显示成功消息等

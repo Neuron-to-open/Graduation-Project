@@ -112,7 +112,7 @@
         alert("登录成功")
         tochat()
       } else {
-        alert("登录失败")
+        alert("登陆失败")
       }
     } catch (error) {
       handleError(error);

@@ -19,27 +19,75 @@
 
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import { REGISTRATION_API } from '@/utils/url';
+  import axios from 'axios';
+  import qs from 'qs'
+
+
+
   const messages:any = ref([])
   const userInput:any = ref('')
 
   const router = useRouter()
 
-  function sendMessage() {
+
+  async function getAnswer() {
+    const url = REGISTRATION_API + '/chat/'
+    try {
+      const response = await axios ( {
+          method: 'POST' ,
+          url : url ,
+          data : qs.stringify({
+              message: userInput.value
+          }) ,
+          headers : {
+              'Content-Type' : 'application/x-www-form-urlencoded' ,
+          },
+      } ) ;
+      console.log(response.data)
+
+      if (response.data.error_num == 0){
+        const result = response.data      
+        return result
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    return null
+    // messages.value.push({ text: data.answer, sender: 'bot' })
+  }
+
+   /**
+   * 发送消息功能，当用户输入消息后点击发送，将消息添加到聊天记录中，并模拟机器人回复。
+   * 无参数
+   * 无返回值
+   */
+  async function sendMessage() {
     if (userInput.value.trim()) {
-      // 用户消息
+      // 判断用户输入是否为空，不为空则添加到消息列表
       messages.value.push({ text: userInput.value, sender: 'user' })
-      // 模拟聊天机器人的回答
+      const result:any = await getAnswer()
+      // 模拟延迟以仿真聊天机器人回答
       setTimeout(() => {
-        messages.value.push({ text: `这是你的消息: ${userInput.value}`, sender: 'bot' })
+        console.log('result:', result['answer'])
+        messages.value.push({ text: `这是你的消息: ${result['answer']}`, sender: 'bot' })
       }, 1000)
-      // 清空输入框
+      // 发送后清空输入框
       userInput.value = ''
     }
   }
 
+  /**
+   * 跳转到可视化页面的功能。
+   * 无参数
+   * 无返回值
+   */
   function tovisual() {
     router.push('/visual')
   }
+
+
 </script>
 
 
