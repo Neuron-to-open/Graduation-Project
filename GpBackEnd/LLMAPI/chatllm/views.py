@@ -1,14 +1,8 @@
-from os import read
-import re
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from flask import request
-from numpy import double
-from chatllm import models
 from chatllm.models import User, Assessment
-import json 
-
+from paddlenlp.transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Create your views here.
 @csrf_exempt
@@ -99,7 +93,7 @@ def register(request):
     return JsonResponse(response)
 
         
-
+@csrf_exempt
 def login(request):
     """
     处理用户登录请求。
@@ -112,12 +106,12 @@ def login(request):
     """
     response = {}  # 初始化响应字典
     
-    # 检查请求方法是否为GET
+    # 检查请求方法是否为POST    
     if request.method == 'POST':
         print(request.POST)  # 打印POST请求参数
     else:
         # 如果请求方法不是POST，则设置错误信息并返回
-        response['msg'] = "It's not a POST request"
+        response['msg'] = "It's not a post request"
         response['error_num'] = -1
         return JsonResponse(response)
     
@@ -136,7 +130,7 @@ def login(request):
         response['error_num'] = 0
     else:
         # 如果用户不存在，设置失败信息
-        response['msg'] = "It's not a GET request"
+        response['msg'] = "It's not a POST request"
         response['error_num'] = -1
 
     # 返回响应
@@ -168,9 +162,9 @@ def chat(request):
     try:
         data = request.POST
         query = data.get('query')
-
+        answer = UseBC(query)
         # 设置欢迎信息和处理成功的状态
-        response['answer'] = "Hello  i am llama2 ! Welcome to my chatllm !"
+        response['answer'] = answer
         response['msg'] = 'successfully chat'
         response['error_num'] = 0
 
@@ -186,4 +180,17 @@ def chat(request):
 
 # @csrf_exempt
 # def show(request):
-    
+
+
+
+
+
+def UseBC(query:str) :
+    model = AutoModelForCausalLM.from_pretrained("baichuan-inc/Baichuan-7B")
+    tokenizer = AutoTokenizer.from_pretrained("baichuan-inc/Baichuan-7B")
+    print(query)
+    input_features = tokenizer(query, return_tensors="pd")
+    outputs = model.generate(**input_features, max_length=128)
+    result = tokenizer.batch_decode(outputs[0])
+
+    return result

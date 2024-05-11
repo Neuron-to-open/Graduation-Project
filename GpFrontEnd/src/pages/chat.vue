@@ -38,7 +38,7 @@
           method: 'POST' ,
           url : url ,
           data : qs.stringify({
-              message: userInput.value
+              query: userInput.value
           }) ,
           headers : {
               'Content-Type' : 'application/x-www-form-urlencoded' ,
@@ -70,8 +70,8 @@
       const result:any = await getAnswer()
       // 模拟延迟以仿真聊天机器人回答
       setTimeout(() => {
-        console.log('result:', result['answer'])
-        messages.value.push({ text: `这是你的消息: ${result['answer']}`, sender: 'bot' })
+        console.log('result:', result.answer[0])
+        messages.value.push({ text: `这是你的消息: ${result.answer[0]}`, sender: 'bot' })
       }, 1000)
       // 发送后清空输入框
       userInput.value = ''
