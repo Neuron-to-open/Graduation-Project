@@ -82,8 +82,8 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'LLMAPI',
         'USER' : 'root',
-        'PASSWORD' : 'Mysqlyyds.666',
-        'HOST' : '59.110.126.202',
+        'PASSWORD' : 'xxx',
+        'HOST' : 'xxx',
         'PORT' : '3306'
     }
 }

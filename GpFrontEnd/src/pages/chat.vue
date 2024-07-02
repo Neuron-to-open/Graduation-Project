@@ -1,7 +1,6 @@
 <template>
   <div class="chat-container">
-    <h1>paddlepaddle chatbot</h1>
-    <h2 @click="tovisual">可视化</h2>
+    <h1>Medical chatbot</h1>
     <div class="messages">
       <div v-for="(message, index) in messages" :key="index" :class="`message ${message.sender}`">
         <div class="message-content">{{ message.text }}</div>
@@ -9,7 +8,7 @@
     </div>
     <form @submit.prevent="sendMessage" class="message-form">
       <input v-model="userInput" placeholder="输入消息..." autofocus>
-      <button type="submit">发送</button>
+      <button type="submit">提交</button>
     </form>
   </div>
 </template>

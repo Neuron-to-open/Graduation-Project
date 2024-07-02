@@ -11,7 +11,7 @@
       <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
         <img
           alt=""
-          src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          src="https://static.hao86.com/daxue/eef1ae26bc2618c35291664fa9e50ae5.jpg"
           class="absolute inset-0 h-full w-full object-cover opacity-80"
         />
   
@@ -32,12 +32,11 @@
           </a>
   
           <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-            Welcome to Squid 🦑
+            基于大语言模型的领域预训练算法的设计与验证
           </h2>
   
           <p class="mt-4 leading-relaxed text-white/90">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-            quibusdam aperiam voluptatum.
+            欢迎使用我的毕业展示系统
           </p>
         </div>
       </section>
